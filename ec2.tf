@@ -5,8 +5,8 @@ resource "aws_instance" "Bastion" {
 
 
   vpc_security_group_ids = [aws_security_group.SG-Bastion.id]
-  key_name               = "NewINstansAWS-key"
-  user_data = <<EOF
+  key_name               = "ssh-key-private-aws-frankfurt"
+  user_data              = <<EOF
 #!/bin/bash
 sudo yum update -y
 sudo yum -y install httpd
