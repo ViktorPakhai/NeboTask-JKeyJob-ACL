@@ -8,7 +8,7 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "92.52.178.146/32"
+    cidr_block = "92.52.178.0/24"
     from_port  = 22
     to_port    = 22
   }
@@ -18,7 +18,7 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
     protocol   = "tcp"
     rule_no    = 200
     action     = "allow"
-    cidr_block = "92.52.178.146/32"
+    cidr_block = "92.52.178.0/24"
     from_port  = 80
     to_port    = 80
   }
@@ -47,7 +47,7 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "92.52.178.146/32"
+    cidr_block = "92.52.178.0/24"
     from_port  = 22
     to_port    = 22
   }
@@ -57,7 +57,7 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
     protocol   = "tcp"
     rule_no    = 200
     action     = "allow"
-    cidr_block = "92.52.178.146/32"
+    cidr_block = "92.52.178.0/24"
     from_port  = 80
     to_port    = 80
   }
@@ -65,7 +65,7 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
     protocol   = "tcp"
     rule_no    = 250
     action     = "allow"
-    cidr_block = "92.52.178.146/32"
+    cidr_block = "92.52.178.0/24"
     from_port  = 443
     to_port    = 443
   }
@@ -75,7 +75,7 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
     protocol   = "tcp"
     rule_no    = 300
     action     = "allow"
-    cidr_block = "92.52.178.146/32"
+    cidr_block = "92.52.178.0/24"
     from_port  = 1024
     to_port    = 65535
   }
