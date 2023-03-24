@@ -1,9 +1,9 @@
-resource "aws_security_group" "SG-Bastion" {
+resource "aws_security_group" "SG-WebServer" {
   name        = "SG-Bastion"
   vpc_id      = aws_vpc.main.id
-  description = "SG for access to Bastion"
+  description = "SG for access to webserver"
   dynamic "ingress" {
-    for_each = ["22", "3389", "8291"]
+    for_each = ["22", "80", "443"]
     content {
       from_port   = ingress.value
       to_port     = ingress.value

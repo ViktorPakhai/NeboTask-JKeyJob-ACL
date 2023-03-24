@@ -1,19 +1,21 @@
-resource "aws_instance" "Bastion" {
-  ami           = "ami-0499632f10efc5a62" # Amazon Linux
+resource "aws_instance" "webserver" {
+  ami           = "ami-0e067cc8a2b58de59" # Ubuntu 20.04 LTS
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public-eu-central-1a.id
+  associate_public_ip_address = true
 
 
-  vpc_security_group_ids = [aws_security_group.SG-Bastion.id]
+  vpc_security_group_ids = [aws_security_group.SG-WebServer.id]
   key_name               = "ssh-key-private-aws-frankfurt"
   user_data              = <<EOF
 #!/bin/bash
-sudo yum update -y
-sudo yum -y install httpd
-sudo chkconfig httpd on
-sudo service httpd start
-sudo cd /var/www/html/
-sudo echo '<html><h1>hello, world! Nebo task for ACL </h1></html>' > index.html
+sudo apt update
+sudo apt install apache2 -y
+sudo systemctl start apache2
+sudo systemctl enable apache2
+sudo su
+cd /var/www/html/
+echo '<html><h1>hello, world! Nebo task for ACL </h1></html>' > index.html
 EOF
 
   tags = {
@@ -22,4 +24,10 @@ EOF
 
 
 
+}
+
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [aws_instance.webserver]
+
+  create_duration = "30s"
 }
