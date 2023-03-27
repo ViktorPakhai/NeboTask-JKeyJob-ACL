@@ -22,7 +22,17 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
     from_port  = 80
     to_port    = 80
   }
- ingress {
+
+   # allow ingress port 443
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 225
+    action     = "allow"
+    cidr_block = "92.52.178.0/24"
+    from_port  = 443
+    to_port    = 443
+  }
+  ingress {
     protocol   = "tcp"
     rule_no    = 250
     action     = "deny"
@@ -41,36 +51,7 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
   }
 
 
-
-  # allow egress port 22
-  egress {
-    protocol   = "tcp"
-    rule_no    = 100
-    action     = "allow"
-    cidr_block = "92.52.178.0/24"
-    from_port  = 22
-    to_port    = 22
-  }
-
-  # allow egress port 80
-  egress {
-    protocol   = "tcp"
-    rule_no    = 200
-    action     = "allow"
-    cidr_block = "92.52.178.0/24"
-    from_port  = 80
-    to_port    = 80
-  }
-  egress {
-    protocol   = "tcp"
-    rule_no    = 250
-    action     = "allow"
-    cidr_block = "92.52.178.0/24"
-    from_port  = 443
-    to_port    = 443
-  }
-
-  # Allows outbound SSH traffic
+  # Allows outbound SSH traffic and WWW outbound
   egress {
     protocol   = "tcp"
     rule_no    = 300
@@ -84,6 +65,6 @@ resource "aws_network_acl" "NeboTask_Security_ACL" {
   tags = {
     Name = "NeboTask-ACL"
   }
- depends_on = [time_sleep.wait_30_seconds]
+  depends_on = [time_sleep.wait_30_seconds]
 
 }

@@ -1,7 +1,7 @@
 resource "aws_instance" "webserver" {
-  ami           = "ami-0e067cc8a2b58de59" # Ubuntu 20.04 LTS
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public-eu-central-1a.id
+  ami                         = "ami-0e067cc8a2b58de59" # Ubuntu 20.04 LTS
+  instance_type               = "t2.micro"
+  subnet_id                   = aws_subnet.public-eu-central-1a.id
   associate_public_ip_address = true
 
 
